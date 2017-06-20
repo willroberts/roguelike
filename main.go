@@ -20,8 +20,8 @@ func DrawScreen() {
 	for y := 0; y < h; y++ {
 		for x := 0; x < w; x++ {
 			r := runes[rand.Intn(len(runes))]
-			attr := rand.Int()%8 + 1
-			termbox.SetCell(x, y, r, termbox.ColorDefault, termbox.Attribute(attr))
+			bgColor := rand.Int()%8 + 1
+			termbox.SetCell(x, y, r, termbox.ColorDefault, termbox.Attribute(bgColor))
 		}
 	}
 	termbox.Flush()
