@@ -7,5 +7,6 @@ https://www.reddit.com/r/roguelikedev/comments/6h4z09/roguelikedev_does_the_comp
 
 ## Dependencies
 
-github.com/nsf/termbox-go: Terminal engine
-github.com/fatih/color: ANSI colors
+* github.com/nsf/termbox-go: Terminal engine
+* github.com/fatih/color: ANSI colors
+	* May not be needed with termbox.Attribute
