@@ -1,0 +1,4 @@
+package: github.com/willroberts/roguelike
+import:
+- package: github.com/nsf/termbox-go
+  version: 72800b73ab9a3c78df350738298b0361354772ff
