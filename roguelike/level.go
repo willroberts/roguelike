@@ -1,7 +1,14 @@
 package roguelike
 
+import (
+	"fmt"
+
+	termbox "github.com/nsf/termbox-go"
+)
+
 type Level interface {
 	Tiles() [][]Tile
+	Render()
 }
 
 type level struct {
@@ -14,11 +21,25 @@ func (l *level) Tiles() [][]Tile {
 	return l.tiles
 }
 
+func (l *level) Render() {
+	for y := 0; y < l.h; y++ {
+		for x := 0; x < l.w; x++ {
+			t := l.tiles[x][y]
+			if t.IsBlocking() {
+				termbox.SetCell(x, y, ' ', termbox.ColorDefault, colorBrown)
+			} else {
+				termbox.SetCell(x, y, ' ', termbox.ColorDefault, colorGreen)
+			}
+		}
+	}
+}
+
 func NewLevel(w, h int) Level {
+	fmt.Printf("A")
 	tiles := make([][]Tile, 0)
-	for i := 0; i < w; i++ {
+	for x := 0; x < w; x++ {
 		column := []Tile{}
-		for j := 0; j < h; j++ {
+		for y := 0; y < h; y++ {
 			column = append(column, NewTile(false, false))
 		}
 		tiles = append(tiles, column)

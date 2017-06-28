@@ -59,6 +59,9 @@ func (g *Game) Setup() error {
 func (g *Game) Main() {
 	termbox.Clear(termbox.ColorDefault, bgColor)
 
+	// Draw terrain.
+	g.Level.Render()
+
 	// Draw player and other entities.
 	g.Player.Render()
 	for _, e := range g.Entities {
