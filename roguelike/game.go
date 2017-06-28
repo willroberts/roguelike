@@ -35,7 +35,7 @@ func (g *Game) Setup() error {
 
 	g.Player = NewEntity(1, 1, charRogue, termbox.ColorYellow)
 	g.Entities = []Entity{
-		NewEntity(16, 16, charLight, termbox.ColorGreen),
+		NewEntity(16, 16, charLight, termbox.ColorWhite),
 	}
 	g.Running = true
 
@@ -47,11 +47,8 @@ func (g *Game) Setup() error {
 func (g *Game) Main() {
 	termbox.Clear(termbox.ColorDefault, bgColor)
 
-	// Draw Player
-	p := g.Player
-	termbox.SetCell(p.X(), p.Y(), p.Icon(), p.Color(), bgColor)
-
-	// Draw other entities.
+	// Draw player and other entities.
+	g.Player.Render()
 	for _, e := range g.Entities {
 		e.Render()
 	}
