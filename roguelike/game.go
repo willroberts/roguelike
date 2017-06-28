@@ -7,7 +7,8 @@ import (
 )
 
 const (
-	fTime time.Duration = 1000 / 30 * time.Millisecond // 30 FPS.
+	fTime   time.Duration     = 1000 / 30 * time.Millisecond // 30 FPS.
+	bgColor termbox.Attribute = termbox.ColorBlack
 )
 
 // Game is our container for all game data. We bind methods to it in order to
@@ -15,9 +16,7 @@ const (
 type Game struct {
 	Running    bool
 	EventQueue chan termbox.Event
-
-	PlayerX int
-	PlayerY int
+	Player     Entity
 }
 
 // Setup performs one-time tasks at startup in order to initialize the game.
@@ -33,9 +32,8 @@ func (g *Game) Setup() error {
 		}
 	}(g)
 
+	g.Player = NewEntity(1, 1, charRogue, termbox.ColorYellow)
 	g.Running = true
-	g.PlayerX = 1
-	g.PlayerY = 1
 
 	return nil
 }
@@ -43,9 +41,11 @@ func (g *Game) Setup() error {
 // Main is the game's core loop. It is expected to be run from a main package
 // until g.Running is set to false by the game.
 func (g *Game) Main() {
-	termbox.Clear(termbox.ColorWhite, termbox.ColorBlack)
-	termbox.SetCell(g.PlayerX, g.PlayerY, charDark, termbox.ColorWhite,
-		termbox.ColorBlack)
+	termbox.Clear(termbox.ColorDefault, bgColor)
+
+	// Draw Player
+	p := g.Player
+	termbox.SetCell(p.X(), p.Y(), p.Icon(), p.Color(), bgColor)
 	termbox.Flush()
 	time.Sleep(fTime)
 }

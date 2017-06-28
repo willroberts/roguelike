@@ -11,16 +11,16 @@ func (g *Game) HandleInput(ev termbox.Event) {
 			g.Running = false
 		}
 		if ev.Key == termbox.KeyArrowUp {
-			g.PlayerY--
+			g.Player.Move(0, -1)
 		}
 		if ev.Key == termbox.KeyArrowDown {
-			g.PlayerY++
+			g.Player.Move(0, 1)
 		}
 		if ev.Key == termbox.KeyArrowLeft {
-			g.PlayerX--
+			g.Player.Move(-1, 0)
 		}
 		if ev.Key == termbox.KeyArrowRight {
-			g.PlayerX++
+			g.Player.Move(1, 0)
 		}
 	}
 }
