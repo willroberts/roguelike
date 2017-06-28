@@ -10,7 +10,7 @@ const (
 	colorBlack     termbox.Attribute = 0x11
 	colorBrown     termbox.Attribute = 0x60
 	colorGold      termbox.Attribute = 0x90
-	colorGreen     termbox.Attribute = 0x23
+	colorGreen     termbox.Attribute = 0x17
 	colorIndigo    termbox.Attribute = 0x40
 	colorLtOrange  termbox.Attribute = 0xe0
 	colorLtPurple  termbox.Attribute = 0xb8
@@ -23,6 +23,8 @@ const (
 	colorTeal      termbox.Attribute = 0x20
 	colorWhite     termbox.Attribute = 0xe8
 	colorYellow    termbox.Attribute = 0xc0
+
+	bgColor termbox.Attribute = colorGreen
 )
 
 var (

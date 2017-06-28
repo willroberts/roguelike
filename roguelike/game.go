@@ -7,9 +7,7 @@ import (
 )
 
 const (
-	fTime     time.Duration     = 1000 / 30 * time.Millisecond // 30 FPS.
-	bgColor   termbox.Attribute = termbox.ColorBlack
-	wallColor termbox.Attribute = termbox.ColorGreen
+	fTime time.Duration = 1000 / 30 * time.Millisecond // 30 FPS.
 )
 
 // Game is our container for all game data. We bind methods to it in order to
