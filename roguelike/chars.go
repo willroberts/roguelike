@@ -7,7 +7,9 @@ const (
 	charLight rune = '☺'
 	charDark  rune = '☻'
 
-	colorPink termbox.Attribute = 0xb8
+	colorPink   termbox.Attribute = 0xb8
+	colorWall   termbox.Attribute = 0x11 // MIN
+	colorGround termbox.Attribute = 0xe8 // MAX
 )
 
 var (
