@@ -1,6 +1,9 @@
 package roguelike
 
 type Tile interface {
+	IsBlocking() bool
+	IsOpaque() bool
+
 	SetBlocking()
 	SetOpaque()
 }
@@ -8,6 +11,14 @@ type Tile interface {
 type tile struct {
 	blocked bool
 	opaque  bool
+}
+
+func (t *tile) IsBlocking() bool {
+	return t.blocked
+}
+
+func (t *tile) IsOpaque() bool {
+	return t.opaque
 }
 
 func (t *tile) SetBlocking() {
