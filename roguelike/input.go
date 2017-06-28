@@ -11,16 +11,24 @@ func (g *Game) HandleInput(ev termbox.Event) {
 			g.Running = false
 		}
 		if ev.Key == termbox.KeyArrowUp {
-			g.Player.Move(0, -1)
+			if !g.Level.IsBlocked(g.Player.X(), g.Player.Y()-1) {
+				g.Player.Move(0, -1)
+			}
 		}
 		if ev.Key == termbox.KeyArrowDown {
-			g.Player.Move(0, 1)
+			if !g.Level.IsBlocked(g.Player.X(), g.Player.Y()+1) {
+				g.Player.Move(0, 1)
+			}
 		}
 		if ev.Key == termbox.KeyArrowLeft {
-			g.Player.Move(-1, 0)
+			if !g.Level.IsBlocked(g.Player.X()-1, g.Player.Y()) {
+				g.Player.Move(-1, 0)
+			}
 		}
 		if ev.Key == termbox.KeyArrowRight {
-			g.Player.Move(1, 0)
+			if !g.Level.IsBlocked(g.Player.X()+1, g.Player.Y()) {
+				g.Player.Move(1, 0)
+			}
 		}
 	}
 }

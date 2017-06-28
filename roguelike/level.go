@@ -8,6 +8,7 @@ import (
 
 type Level interface {
 	Tiles() [][]Tile
+	IsBlocked(x, y int) bool
 	Render()
 }
 
@@ -21,11 +22,15 @@ func (l *level) Tiles() [][]Tile {
 	return l.tiles
 }
 
+func (l *level) IsBlocked(x, y int) bool {
+	return l.tiles[x][y].IsBlocked()
+}
+
 func (l *level) Render() {
 	for y := 0; y < l.h; y++ {
 		for x := 0; x < l.w; x++ {
 			t := l.tiles[x][y]
-			if t.IsBlocking() {
+			if t.IsBlocked() {
 				termbox.SetCell(x, y, ' ', termbox.ColorDefault, colorBrown)
 			} else {
 				termbox.SetCell(x, y, ' ', termbox.ColorDefault, colorGreen)

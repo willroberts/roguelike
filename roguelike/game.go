@@ -36,19 +36,20 @@ func (g *Game) Setup() error {
 	}(g)
 
 	g.Level = NewLevel(80, 45)
-	g.Level.Tiles()[30][22].SetBlocking()
+	g.Level.Tiles()[30][22].SetBlocked()
 	g.Level.Tiles()[30][22].SetOpaque()
-	g.Level.Tiles()[31][22].SetBlocking()
+	g.Level.Tiles()[31][22].SetBlocked()
 	g.Level.Tiles()[31][22].SetOpaque()
-	g.Level.Tiles()[32][22].SetBlocking()
+	g.Level.Tiles()[32][22].SetBlocked()
 	g.Level.Tiles()[32][22].SetOpaque()
 
+	// FIXME: Set blocking on entities.
 	g.Player = NewEntity(1, 1, charRogue, termbox.ColorYellow)
 	g.Entities = []Entity{
 		NewEntity(16, 16, charLight, termbox.ColorWhite),
 	}
-	g.Running = true
 
+	g.Running = true
 	return nil
 }
 
