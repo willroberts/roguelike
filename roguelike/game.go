@@ -17,6 +17,7 @@ type Game struct {
 	Running    bool
 	EventQueue chan termbox.Event
 	Player     Entity
+	Entities   []Entity
 }
 
 // Setup performs one-time tasks at startup in order to initialize the game.
@@ -33,6 +34,9 @@ func (g *Game) Setup() error {
 	}(g)
 
 	g.Player = NewEntity(1, 1, charRogue, termbox.ColorYellow)
+	g.Entities = []Entity{
+		NewEntity(16, 16, charLight, termbox.ColorGreen),
+	}
 	g.Running = true
 
 	return nil
@@ -46,6 +50,12 @@ func (g *Game) Main() {
 	// Draw Player
 	p := g.Player
 	termbox.SetCell(p.X(), p.Y(), p.Icon(), p.Color(), bgColor)
+
+	// Draw other entities.
+	for _, e := range g.Entities {
+		termbox.SetCell(e.X(), e.Y(), e.Icon(), e.Color(), bgColor)
+	}
+
 	termbox.Flush()
 	time.Sleep(fTime)
 }
