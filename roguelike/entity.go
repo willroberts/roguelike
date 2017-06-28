@@ -9,6 +9,8 @@ type Entity interface {
 	Color() termbox.Attribute
 
 	Move(int, int)
+	Render()
+	Clear()
 }
 
 type entity struct {
@@ -37,6 +39,14 @@ func (e *entity) Color() termbox.Attribute {
 func (e *entity) Move(dx, dy int) {
 	e.x += dx
 	e.y += dy
+}
+
+func (e *entity) Render() {
+	termbox.SetCell(e.x, e.y, e.icon, e.color, bgColor)
+}
+
+func (e *entity) Clear() {
+	termbox.SetCell(e.x, e.y, ' ', termbox.ColorDefault, bgColor)
 }
 
 func NewEntity(x, y int, icon rune, color termbox.Attribute) Entity {

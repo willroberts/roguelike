@@ -53,7 +53,7 @@ func (g *Game) Main() {
 
 	// Draw other entities.
 	for _, e := range g.Entities {
-		termbox.SetCell(e.X(), e.Y(), e.Icon(), e.Color(), bgColor)
+		e.Render()
 	}
 
 	termbox.Flush()
