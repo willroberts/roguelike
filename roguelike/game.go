@@ -7,8 +7,9 @@ import (
 )
 
 const (
-	fTime   time.Duration     = 1000 / 30 * time.Millisecond // 30 FPS.
-	bgColor termbox.Attribute = termbox.ColorBlack
+	fTime     time.Duration     = 1000 / 30 * time.Millisecond // 30 FPS.
+	bgColor   termbox.Attribute = termbox.ColorBlack
+	wallColor termbox.Attribute = termbox.ColorGreen
 )
 
 // Game is our container for all game data. We bind methods to it in order to
@@ -16,6 +17,7 @@ const (
 type Game struct {
 	Running    bool
 	EventQueue chan termbox.Event
+	Level      Level
 	Player     Entity
 	Entities   []Entity
 }
@@ -26,12 +28,22 @@ func (g *Game) Setup() error {
 		return err
 	}
 
+	termbox.SetOutputMode(termbox.Output256)
+
 	g.EventQueue = make(chan termbox.Event)
 	go func(g *Game) {
 		for {
 			g.EventQueue <- termbox.PollEvent()
 		}
 	}(g)
+
+	g.Level = NewLevel(80, 45)
+	g.Level.Tiles()[30][22].SetBlocking()
+	g.Level.Tiles()[30][22].SetOpaque()
+	g.Level.Tiles()[31][22].SetBlocking()
+	g.Level.Tiles()[31][22].SetOpaque()
+	g.Level.Tiles()[32][22].SetBlocking()
+	g.Level.Tiles()[32][22].SetOpaque()
 
 	g.Player = NewEntity(1, 1, charRogue, termbox.ColorYellow)
 	g.Entities = []Entity{
